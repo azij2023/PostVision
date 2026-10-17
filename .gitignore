@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large dataset raw files and caches (EMNIST test CSVs & NPZ caches > 250MB total)
+dataset/*.csv
+dataset/*.npz
+dataset/*.zip
+
+# Uploaded files in web app
+webapp/uploads/*
+!webapp/uploads/.gitkeep
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# IDE / Editor configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs & temp
+*.log
+.pytest_cache/
