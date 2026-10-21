@@ -1,6 +1,11 @@
-# ✉️ Postal Address Image / OCR to Structured Text Data
+# PostalVision: Postal Address Image / OCR to Structured Text Data
 
-### Built with Deep Neural Networks Designed Strictly from Scratch
+[![Live Showcase](https://img.shields.io/badge/Live%20Showcase-GitHub%20Pages-e11d48?style=for-the-badge&logo=github)](https://azij2023.github.io/PostVision/)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
+[![EMNIST](https://img.shields.io/badge/Dataset-EMNIST%20(2.2M%20samples)-7c3aed?style=for-the-badge)](https://www.nist.gov/itl/products-and-services/emnist-dataset)
+
+> **Live Interactive Showcase**: [https://azij2023.github.io/PostVision/](https://azij2023.github.io/PostVision/)  
 > **Course / Project**: MSDSM Sem 3 - AI & Machine Learning  
 > **Key Constraint Satisfied**: **100% Custom Deep Neural Networks** designed from first principles with zero standard model dependencies (**No ResNet, No DenseNet, No MobileNet, No VGG, No EfficientNet**).
 
@@ -184,3 +189,4 @@ Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in any browser.
 - **No Pre-trained Weights**: The network weights are initialized from scratch using Kaiming Normal and Xavier Uniform distributions.
 - **No Third-Party OCR Engines**: Tesseract, EasyOCR, PaddleOCR, and TrOCR are completely absent.
 - **Architectural Traceability**: Every forward pass layer can be audited and inspected via `model.get_architecture_summary()` and `model.extract_features()`.
+
