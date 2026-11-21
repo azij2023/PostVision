@@ -1,190 +1,860 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" data-theme="light" class="sample-mode">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PostalVision: End-to-End Deep Neural Network OCR and Address Extraction System built 100% from scratch.">
-    <title>PostalVision - Deep Neural Network Postal OCR</title>
+    <meta name="description" content="PostalVision: Interactive Postal Envelope OCR & Entity Extraction powered by custom deep learning neural networks.">
+    <title>PostalVision — Original App Sample</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Dynamic Ambient Glows & Grid Background -->
     <div class="bg-grid"></div>
     <div class="bg-glow bg-glow-1"></div>
     <div class="bg-glow bg-glow-2"></div>
     <div class="bg-glow bg-glow-3"></div>
-    <nav class="navbar" id="navbar">
-        <div class="nav-inner">
-            <div class="nav-brand">
-                <div class="brand-icon">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                        <rect x="2" y="6" width="28" height="20" rx="4" stroke="url(#navGrad)" stroke-width="2.5"/>
-                        <path d="M2 9L16 18.5L30 9" stroke="url(#navGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="16" cy="18.5" r="2.5" fill="url(#navGrad)"/>
-                        <defs><linearGradient id="navGrad" x1="0" y1="0" x2="32" y2="32"><stop offset="0%" stop-color="#e11d48"/><stop offset="100%" stop-color="#7c3aed"/></linearGradient></defs>
+
+    <!-- Header Navigation -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <div class="logo-group">
+                <div class="logo-icon">
+                    <svg width="34" height="34" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="6" width="28" height="20" rx="4" stroke="url(#logoGrad)" stroke-width="2.5"/>
+                        <path d="M2 9L16 18.5L30 9" stroke="url(#logoGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="16" cy="18.5" r="2.5" fill="url(#logoGrad)"/>
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32">
+                                <stop offset="0%" stop-color="var(--accent-primary)"/>
+                                <stop offset="100%" stop-color="var(--accent-secondary)"/>
+                            </linearGradient>
+                        </defs>
                     </svg>
                 </div>
-                <span class="brand-text">PostalVision</span>
+                <div>
+                    <div class="logo-title-row">
+                        <h1 class="logo-text">PostalVision</h1>
+                        <span class="version-pill" id="version-pill">Clean White</span>
+                    </div>
+                    <p class="logo-sub">Deep Address OCR · Built 100% from Scratch</p>
+                </div>
             </div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#architecture">Architecture</a>
-                <a href="#demo">Demo</a>
-                <a href="#metrics">Metrics</a>
-                <a href="https://github.com/azij2023/PostVision" class="nav-github" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    GitHub
-                </a>
-            </div>
-        </div>
-    </nav>
-    <section class="hero" id="hero">
-        <div class="hero-content">
-            <div class="hero-badge-row">
-                <span class="hero-badge">100% Custom Neural Network</span>
-                <span class="hero-badge hero-badge-accent">No ResNet / No DenseNet / No VGG</span>
-            </div>
-            <h1 class="hero-title"><span class="hero-title-gradient">PostalVision</span></h1>
-            <p class="hero-subtitle">End-to-End Deep Neural Network OCR & Address Extraction System</p>
-            <p class="hero-desc">Automatically reads postal envelopes, transcribes handwritten addresses using a custom <strong>CRNN + BiGRU + CTC</strong> architecture designed from first principles, and extracts structured postal fields.</p>
-            <div class="hero-actions">
-                <a href="https://github.com/azij2023/PostVision" class="btn btn-primary" target="_blank" rel="noopener">
-                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-                    View Source Code
-                </a>
-                <a href="#architecture" class="btn btn-outline">Explore Architecture</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item"><span class="stat-value" data-target="1900000" data-suffix="+">0</span><span class="stat-label">Handwritten Glyphs</span></div>
-                <div class="stat-item"><span class="stat-value" data-target="76" data-suffix="">0</span><span class="stat-label">Character Classes</span></div>
-                <div class="stat-item"><span class="stat-value" data-target="6" data-suffix="">0</span><span class="stat-label">EMNIST Splits</span></div>
-                <div class="stat-item"><span class="stat-value" data-target="0" data-suffix="">0</span><span class="stat-label">Pretrained Models</span></div>
+
+            <div class="header-actions">
+                <!-- Theme Switcher Toggle -->
+                <button class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Clean White / Dark Synthwave Theme">
+                    <span id="theme-icon">☀️</span>
+                    <span id="theme-label">White Mode</span>
+                </button>
+
+                <!-- Neural Status Badge -->
+                <div class="header-badge" id="model-badge">
+                    <span class="badge-dot"></span>
+                    <span>Sample Mode</span>
+                </div>
             </div>
         </div>
-    </section>
-    <section class="section" id="features">
-        <div class="section-inner">
+    </header>
+
+
+    <!-- Main Content Container -->
+    <main class="main-content">
+        <div class="sample-notice" role="status">
+            This is the original PostalVision interface with five static sample records. Select a preset to explore the address fields and exports. Live OCR for uploaded images requires the Flask app.
+            <a href="https://github.com/azij2023/PostVision#8-launch-the-interactive-web-dashboard" target="_blank" rel="noopener">Run the full app</a>
+        </div>
+
+        <!-- Upload & Input Stage -->
+        <section class="upload-section spotlight-card" id="upload-section">
             <div class="section-header">
-                <span class="section-badge">Capabilities</span>
-                <h2 class="section-title">Intelligent Postal Processing</h2>
-                <p class="section-desc">From raw envelope photographs to structured digital postal records in milliseconds.</p>
+                <div class="hero-badge">Original App Sample</div>
+                <h2 class="section-title">Explore a Sample Envelope</h2>
+                <p class="section-desc">Choose one of the five envelopes below to inspect its example address record.</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card"><div class="feature-icon">&#128065;</div><h3>Layout Analysis</h3><p>CLAHE contrast enhancement, bilateral filtering, morphological dilation, and connected component line bounding.</p></div>
-                <div class="feature-card"><div class="feature-icon">&#129504;</div><h3>Custom CRNN</h3><p>Asymmetric pooling CNN + 2-layer BiGRU + CTC head. Height 32 to 1 while preserving W/4 sequence length.</p></div>
-                <div class="feature-card"><div class="feature-icon">&#9997;&#65039;</div><h3>Real Handwriting</h3><p>1.9M+ real human handwritten glyphs from all 6 EMNIST splits. Letters A-Z AND digits 0-9.</p></div>
-                <div class="feature-card"><div class="feature-icon">&#128205;</div><h3>Address Parsing</h3><p>Regex and heuristic extractor for Name, Premise, Street, City, State, and 6-digit PIN with geocoding.</p></div>
-                <div class="feature-card"><div class="feature-icon">&#128247;</div><h3>Live Camera</h3><p>Real-time webcam scanner with virtual envelope simulator, viewfinder reticle, and one-click capture.</p></div>
-                <div class="feature-card"><div class="feature-icon">&#128202;</div><h3>Export & Analytics</h3><p>CSV manifest export, batch processing, editable fields with live JSON sync, and speech synthesis.</p></div>
+
+            <!-- Drag & Drop Zone -->
+            <div class="upload-zone" id="upload-zone">
+                <input type="file" id="file-input" accept="image/png,image/jpeg,image/jpg,image/bmp,image/webp,image/tiff" hidden>
+                <div class="upload-content" id="upload-content">
+                    <div class="upload-icon-ring">
+                        <svg class="upload-icon" width="46" height="46" viewBox="0 0 48 48" fill="none">
+                            <path d="M24 32V16M24 16L17 23M24 16L31 23" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 28V36C8 38.2 9.8 40 12 40H36C38.2 40 40 38.2 40 36V28" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <p class="upload-main-text">Select a sample envelope below</p>
+                    <p class="upload-sub-text">The GitHub sample uses recorded example text.</p>
+                    <div class="upload-tags">
+                        <span class="upload-tag">Handwritten Envelopes</span>
+                        <span class="upload-tag">Printed Mail</span>
+                        <span class="upload-tag">Camera Photos</span>
+                    </div>
+                </div>
+
+                <!-- Live Image Preview Stage -->
+                <div class="upload-preview" id="upload-preview" style="display: none;">
+                    <img id="preview-img" src="" alt="Envelope Preview">
+                    <div class="preview-overlay">
+                        <button class="btn-change" id="btn-change">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M2 8C2 4.68 4.68 2 8 2C10.2 2 12.1 3.2 13.1 5M14 8C14 11.32 11.32 14 8 14C5.8 14 3.9 12.8 2.9 11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                                <path d="M13.5 2V5H10.5M2.5 14V11H5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Change Image</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Mode Bar (Camera + Conveyor) -->
+            <div class="action-mode-bar">
+                <button class="action-mode-btn camera-mode-btn" id="open-camera-btn" type="button">
+                    <span class="btn-icon">📷</span>
+                    <span>Live Camera Scanner</span>
+                    <span class="btn-mode-pill">Real-Time</span>
+                </button>
+                <button class="action-mode-btn conveyor-mode-btn" id="open-conveyor-btn" type="button">
+                    <span class="btn-icon">⚙️</span>
+                    <span>Conveyor Belt Auto-Sort</span>
+                    <span class="btn-mode-pill">Hardware Sim</span>
+                </button>
+            </div>
+
+            <!-- Quick Benchmark Samples Bar -->
+            <div class="sample-section">
+                <div class="sample-header">
+                    <span class="sample-label">⚡ Quick Presets:</span>
+                    <span class="sample-subtext">Click to load a synthetic envelope example</span>
+                </div>
+                <div class="sample-cards" id="sample-cards">
+                    <button class="sample-card" data-sample="1" id="sample-btn-1">
+                        <span class="sample-badge">01</span>
+                        <div class="sample-meta">
+                            <strong>Mumbai Log.</strong>
+                            <small>Commercial Mail</small>
+                        </div>
+                    </button>
+                    <button class="sample-card" data-sample="2" id="sample-btn-2">
+                        <span class="sample-badge">02</span>
+                        <div class="sample-meta">
+                            <strong>Bengaluru Tech</strong>
+                            <small>Karnataka Terminal</small>
+                        </div>
+                    </button>
+                    <button class="sample-card" data-sample="3" id="sample-btn-3">
+                        <span class="sample-badge">03</span>
+                        <div class="sample-meta">
+                            <strong>Royal Palms</strong>
+                            <small>Standard Envelope</small>
+                        </div>
+                    </button>
+                    <button class="sample-card" data-sample="4" id="sample-btn-4">
+                        <span class="sample-badge">04</span>
+                        <div class="sample-meta">
+                            <strong>Orchid Res.</strong>
+                            <small>Doctor Addressee</small>
+                        </div>
+                    </button>
+                    <button class="sample-card" data-sample="5" id="sample-btn-5">
+                        <span class="sample-badge">05</span>
+                        <div class="sample-meta">
+                            <strong>Lucknow Dist.</strong>
+                            <small>UP Postal Record</small>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Process Extraction CTA -->
+            <button class="btn-process" id="btn-process" disabled>
+                <div class="btn-process-glow"></div>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 7V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                    <span>View Sample Address Data</span>
+            </button>
+        </section>
+
+        <!-- Dynamic Neural Processing State -->
+        <section class="loading-section" id="loading-section" style="display: none;">
+            <div class="loading-card spotlight-card">
+                <div class="loading-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring spinner-ring-2"></div>
+                    <svg class="spinner-icon" width="32" height="32" viewBox="0 0 32 32" fill="none">
+                        <rect x="2" y="6" width="28" height="20" rx="4" stroke="currentColor" stroke-width="2.2"/>
+                        <path d="M2 9L16 18L30 9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3 class="loading-title">Opening Sample Record</h3>
+                <p class="loading-sub">Loading the recorded address fields for this example.</p>
+                <div class="loading-steps">
+                    <div class="loading-step active" id="step-1">
+                        <div class="step-dot"></div>
+                        <span>Loading sample envelope</span>
+                    </div>
+                    <div class="loading-step" id="step-2">
+                        <div class="step-dot"></div>
+                        <span>Reading example address lines</span>
+                    </div>
+                    <div class="loading-step" id="step-3">
+                        <div class="step-dot"></div>
+                        <span>Preparing sample record</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full Results & Extraction Dashboard -->
+        <section class="results-section" id="results-section" style="display: none;">
+
+            <!-- Results Toolbar & Actions -->
+            <div class="results-header">
+                <div>
+                    <div class="results-pill">Example Record</div>
+                    <h2 class="section-title">Sample Address Results</h2>
+                    <p class="section-desc" id="result-meta"></p>
+                </div>
+                <div class="results-actions">
+                    <button class="btn-action-ghost" id="btn-quick-csv" title="Instantly download postal address record as CSV">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 13H16M8 17H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Export CSV</span>
+                    </button>
+                    <button class="btn-action-ghost" id="btn-read-all" title="Listen to entire transcribed address">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15.54 8.46C16.48 9.4 17 10.68 17 12C17 13.32 16.48 14.6 15.54 15.54" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M19.07 4.93C20.94 6.8 22 9.35 22 12C22 14.65 20.94 17.2 19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Listen All</span>
+                    </button>
+                    <button class="btn-new" id="btn-new">
+                        <svg width="18" height="18" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>New Envelope</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Interactive Envelope Viewer Controls -->
+            <div class="viewer-controls">
+                <div class="viewer-modes" id="viewer-modes">
+                    <span class="viewer-modes-label">SAMPLE ENVELOPE</span>
+                    <span class="view-mode-indicator" aria-current="true">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="4" width="9" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <rect x="13" y="4" width="9" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <span>Original sample</span>
+                    </span>
+                </div>
+                <div class="viewer-legend">
+                    <span class="legend-badge legend-dest"><span class="legend-dot"></span> Destination (TO)</span>
+                    <span class="legend-badge legend-ret"><span class="legend-dot"></span> Return (FROM)</span>
+                    <span class="lines-badge" id="lines-badge">0 lines</span>
+                </div>
+            </div>
+
+            <!-- Side-by-side original and annotated envelope comparison -->
+            <div class="image-comparison" id="image-comparison">
+                <div class="img-card spotlight-card">
+                    <div class="img-card-header">
+                        <span class="img-label">Synthetic Envelope</span>
+                    </div>
+                    <div class="img-card-body">
+                        <img id="result-original" src="" alt="Original envelope">
+                    </div>
+                </div>
+                <div class="img-card spotlight-card">
+                    <div class="img-card-header">
+                        <span class="img-label">Neural Text Line Detections</span>
+                    </div>
+                    <div class="img-card-body">
+                        <img id="result-annotated" src="" alt="Annotated envelope">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vision & Preprocessing Pipeline Inspector -->
+            <div class="vision-inspector-card spotlight-card" id="vision-inspector-card">
+                <div class="vision-inspector-header">
+                    <div class="vision-title-group">
+                        <div class="vision-icon-box">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                                <path d="M20.188 10.934C20.655 11.536 20.655 12.464 20.188 13.066C18.724 14.954 15.654 18 12 18C8.346 18 5.276 14.954 3.812 13.066C3.345 12.464 3.345 11.536 3.812 10.934C5.276 9.046 8.346 6 12 6C15.654 6 18.724 9.046 20.188 10.934Z" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4 class="vision-title">Neural Vision Pipeline Diagnostics</h4>
+                            <span class="vision-subtext">Click any stage below to inspect the real-time image transformation pipeline</span>
+                        </div>
+                    </div>
+                    <div class="vision-pipeline-status" id="vision-status-badge">
+                        <span class="status-pulse-dot"></span>
+                        <span id="vision-status-text">Vision Optimized</span>
+                    </div>
+                </div>
+
+                <!-- Stage Selection Buttons -->
+                <div class="pipeline-stages-bar" id="pipeline-stages-bar">
+                    <button class="stage-btn" data-stage="raw" id="stage-btn-raw">
+                        <span class="stage-num">01</span>
+                        <div class="stage-info">
+                            <strong>Raw Camera Photo</strong>
+                            <small>Original Input</small>
+                        </div>
+                    </button>
+                    <button class="stage-btn" data-stage="rectified" id="stage-btn-rectified">
+                        <span class="stage-num">02</span>
+                        <div class="stage-info">
+                            <strong>Deskew & Boundary</strong>
+                            <small>Quad / Rotated</small>
+                        </div>
+                    </button>
+                    <button class="stage-btn" data-stage="shadow_free" id="stage-btn-shadow">
+                        <span class="stage-num">03</span>
+                        <div class="stage-info">
+                            <strong>Shadow Removal</strong>
+                            <small>Morph. Illumination</small>
+                        </div>
+                    </button>
+                    <button class="stage-btn" data-stage="enhanced" id="stage-btn-enhanced">
+                        <span class="stage-num">04</span>
+                        <div class="stage-info">
+                            <strong>Ink Enhancement</strong>
+                            <small>Bilateral + CLAHE</small>
+                        </div>
+                    </button>
+                    <button class="stage-btn active" data-stage="annotated" id="stage-btn-annotated">
+                        <span class="stage-num">05</span>
+                        <div class="stage-info">
+                            <strong>Neural BBoxes</strong>
+                            <small>Localized Lines</small>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Telemetry HUD Chips -->
+                <div class="vision-telemetry-grid">
+                    <div class="telemetry-chip">
+                        <span class="chip-label">Orientation Deskew</span>
+                        <strong class="chip-val highlight-mint" id="diag-deskew">0.0° Leveled</strong>
+                    </div>
+                    <div class="telemetry-chip">
+                        <span class="chip-label">Perspective Warp</span>
+                        <strong class="chip-val" id="diag-perspective">Frame Fitted</strong>
+                    </div>
+                    <div class="telemetry-chip">
+                        <span class="chip-label">Shadow Attenuation</span>
+                        <strong class="chip-val highlight-rose" id="diag-shadow">--</strong>
+                    </div>
+                    <div class="telemetry-chip">
+                        <span class="chip-label">Contrast Boost Factor</span>
+                        <strong class="chip-val" id="diag-contrast">2.4× CLAHE</strong>
+                    </div>
+                    <div class="telemetry-chip">
+                        <span class="chip-label">Input Resolution</span>
+                        <strong class="chip-val" id="diag-res">--</strong>
+                    </div>
+                    <div class="telemetry-chip">
+                        <span class="chip-label">Filter Kernel</span>
+                        <strong class="chip-val" id="diag-filter">Bilateral (7px, σ=45)</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Line-by-Line Neural Transcription with Interactive Micro-Actions -->
+
+            <div class="transcription-card spotlight-card" id="transcription-card">
+                <div class="card-header-flex">
+                    <h3 class="card-title">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path d="M4 6H20M4 12H16M4 18H11" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                        </svg>
+                        Sample Address Lines
+                    </h3>
+                    <span class="card-tip">Example text from the synthetic envelope</span>
+                </div>
+                <div class="transcription-lines" id="transcription-lines">
+                    <!-- Dynamically injected with rich actions -->
+                </div>
+            </div>
+
+            <!-- Structured Postal Intelligence Grid -->
+            <div class="address-grid">
+                <!-- Extracted Postal Record Card with Inline Editing -->
+                <div class="address-card spotlight-card" id="address-card">
+                    <div class="card-header-flex">
+                        <h3 class="card-title">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2"/>
+                                <path d="M7 8H17M7 12H15M7 16H12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            Example Postal Record
+                        </h3>
+                        <span class="edit-badge" title="Click any field to edit directly">✏️ Click to edit</span>
+                    </div>
+
+                    <!-- Dual-Zone Tabs (To: Addressee vs From: Sender) -->
+                    <div class="dual-zone-tabs" id="dual-zone-tabs">
+                        <button class="zone-tab active" data-zone="recipient" id="zone-tab-recipient" type="button">
+                            <span>📬 To: Addressee</span>
+                        </button>
+                        <button class="zone-tab" data-zone="sender" id="zone-tab-sender" type="button">
+                            <span>📤 From: Sender</span>
+                            <span class="sender-tag-badge" id="sender-tag-badge">None</span>
+                        </button>
+                    </div>
+
+                    <div class="address-fields" id="address-fields">
+                        <!-- Dynamically filled with interactive editable fields -->
+                    </div>
+
+                    <!-- Circular Confidence & Metric Meter -->
+                    <div class="confidence-container">
+                        <div class="confidence-radial-wrap">
+                            <svg class="radial-svg" width="68" height="68" viewBox="0 0 80 80">
+                                <circle class="radial-track" cx="40" cy="40" r="32" stroke-width="6"/>
+                                <circle class="radial-progress" id="radial-progress" cx="40" cy="40" r="32" stroke-width="6"/>
+                            </svg>
+                            <span class="radial-text" id="radial-text">0%</span>
+                        </div>
+                        <div class="confidence-details">
+                            <div class="confidence-title-row">
+                                <span class="confidence-header">Overall Model Confidence</span>
+                                <span class="confidence-rating-badge" id="confidence-rating">Verifying</span>
+                            </div>
+                            <p class="confidence-desc">Mean softmax confidence across character time-steps decoded by the CTC alignment layer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Structured Data & Postal Manifest Export Studio -->
+                <div class="json-card spotlight-card" id="json-card">
+                    <div class="json-header">
+                        <div class="export-header-group">
+                            <h3 class="card-title">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                    <path d="M7 4L3 8V16L7 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M17 4L21 8V16L17 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M14 6L10 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Data Export Studio
+                            </h3>
+                            <!-- Format Switcher Tabs -->
+                            <div class="export-format-tabs">
+                                <button type="button" class="export-tab active" id="tab-export-json" title="View JSON structure">
+                                    <span>📄 JSON</span>
+                                </button>
+                                <button type="button" class="export-tab" id="tab-export-csv" title="View spreadsheet CSV manifest format">
+                                    <span>📊 CSV Manifest</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="json-actions">
+                            <button class="btn-copy" id="btn-copy" title="Copy Current Format to Clipboard">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.6"/>
+                                    <path d="M11 5V3.5C11 2.67 10.33 2 9.5 2H3.5C2.67 2 2 2.67 2 3.5V9.5C2 10.33 2.67 11 3.5 11H5" stroke="currentColor" stroke-width="1.6"/>
+                                </svg>
+                                <span class="btn-copy-label" id="btn-copy-label">Copy JSON</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- JSON View -->
+                    <pre class="json-output" id="json-output"></pre>
+
+                    <!-- CSV Manifest View -->
+                    <div class="csv-container" id="csv-container" style="display: none;">
+                        <pre class="csv-output" id="csv-output"></pre>
+                        <div class="csv-meta-bar">
+                            <span class="csv-spec-tag">RFC-4180 Compliant</span>
+                            <span class="csv-spec-tag">UTF-8 BOM (Excel Ready)</span>
+                            <span class="csv-spec-tag">19 Logistics Fields</span>
+                        </div>
+                    </div>
+
+                    <!-- Export Action Buttons Grid -->
+                    <div class="export-actions-grid">
+                        <button class="btn-download btn-download-primary" id="btn-download-csv" type="button" title="Download postal record as an Excel-ready CSV spreadsheet">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 11V17M12 17L9 14M12 17L15 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Download CSV Manifest</span>
+                        </button>
+                        <button class="btn-download" id="btn-download" type="button" title="Download envelope entity structure as JSON">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 3V15M12 15L7 10M12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M3 18V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <span>Download JSON</span>
+                        </button>
+                        <button class="btn-download btn-download-batch" id="btn-download-batch-csv" type="button" title="Export all envelopes scanned or sorted in this session as a multi-item CSV sorting manifest">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 17V19C9 20.1 9.9 21 11 21H19C20.1 21 21 20.1 21 19V11C21 9.9 20.1 9 19 9H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <rect x="3" y="3" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M7 10L10 13L17 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span id="batch-manifest-btn-text">Session Manifest CSV (1 Record)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Postal Geocoding & Sorting Routing Intelligence Card (Full Width) -->
+                <div class="postal-intelligence-card spotlight-card" id="postal-intel-card">
+                    <div class="intel-header">
+                        <div class="intel-title-group">
+                            <div class="intel-icon-box">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2Z" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="card-title">Postal Geocoding & Routing Intelligence</h3>
+                                <span class="intel-subtext">Automated Postal Directory validation, sorting division & delivery office enrichment</span>
+                            </div>
+                        </div>
+                        <div class="intel-badge" id="intel-badge">
+                            <span class="intel-badge-dot"></span>
+                            <span id="intel-badge-text">Postal Directory Verified</span>
+                        </div>
+                    </div>
+
+                    <div class="intel-grid">
+                        <div class="intel-cell">
+                            <span class="intel-label">Assigned Delivery Post Office</span>
+                            <div class="intel-value" id="intel-po">--</div>
+                            <span class="intel-sub" id="intel-del-type">Delivery Unit</span>
+                        </div>
+                        <div class="intel-cell">
+                            <span class="intel-label">District & Postal Circle</span>
+                            <div class="intel-value" id="intel-district">--</div>
+                            <span class="intel-sub" id="intel-circle">Circle</span>
+                        </div>
+                        <div class="intel-cell">
+                            <span class="intel-label">RMS Sorting Hub</span>
+                            <div class="intel-value highlight" id="intel-hub">--</div>
+                            <span class="intel-sub">Transit Routing Facility</span>
+                        </div>
+                        <div class="intel-cell">
+                            <span class="intel-label">Directory Validation Score</span>
+                            <div class="intel-score-row">
+                                <span class="intel-score-number" id="intel-score">100%</span>
+                                <div class="intel-score-track">
+                                    <div class="intel-score-bar" id="intel-score-bar" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <span class="intel-sub" id="intel-consistency">PIN Code Consistency Verified</span>
+                        </div>
+                    </div>
+
+                    <div class="intel-footer">
+                        <div class="intel-network-pill">
+                            <span class="network-icon">📮</span>
+                            <span id="intel-country-text">India Post Postal Network</span>
+                        </div>
+                        <div class="intel-status-msg" id="intel-status-msg">
+                            ⚡ Zero-latency offline postal intelligence engine active
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Deep Neural Architecture Specs Badge -->
+            <div class="model-footer spotlight-card" id="model-footer">
+                <div class="model-tag">
+                    <span class="model-tag-label">Neural Backbone</span>
+                    <span class="model-tag-value" id="model-name">ScratchPostalCRNN</span>
+                </div>
+                <div class="model-tag">
+                    <span class="model-tag-label">Learnable Weights</span>
+                    <span class="model-tag-value" id="model-params">1,871,468</span>
+                </div>
+                <div class="model-tag">
+                    <span class="model-tag-label">Architectural Mandate</span>
+                    <span class="model-tag-value" style="color: var(--accent-emerald);">100% Scratch (No ResNet/VGG)</span>
+                </div>
+                <div class="model-tag">
+                    <span class="model-tag-label">Recurrent Stack</span>
+                    <span class="model-tag-value">2-Layer BiGRU + CTC Head</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industrial Conveyor Belt Auto-Sort Simulator Section -->
+        <section class="conveyor-section spotlight-card" id="conveyor-section">
+            <div class="conveyor-header">
+                <div class="conveyor-title-group">
+                    <div class="conveyor-icon-box">⚙️</div>
+                    <div>
+                        <h3 class="conveyor-title">Industrial Conveyor Belt Auto-Sort Simulator</h3>
+                        <p class="conveyor-sub">Illustrative mailbag routing using the sample postal PIN codes</p>
+                    </div>
+                </div>
+                <div class="conveyor-controls">
+                    <button class="conveyor-btn btn-conveyor-run" id="sim-run-btn" type="button">
+                        ▶️ Sort Current Envelope
+                    </button>
+                    <button class="conveyor-btn btn-conveyor-batch" id="sim-batch-btn" type="button">
+                        🚀 Stream 10 Envelopes
+                    </button>
+                    <button class="conveyor-btn btn-conveyor-speed" id="sim-speed-btn" type="button">
+                        ⚡ 1× Speed
+                    </button>
+                    <button class="conveyor-btn btn-conveyor-export-csv" id="sim-export-csv-btn" type="button" title="Download all envelopes sorted on conveyor as CSV">
+                        📊 Export Sort Manifest
+                    </button>
+                    <button class="conveyor-btn btn-conveyor-reset" id="sim-reset-btn" type="button" title="Reset Sorting Bins">
+                        🔄 Reset
+                    </button>
+                </div>
+            </div>
+
+            <!-- The Animated Conveyor Belt Rig -->
+            <div class="conveyor-rig" id="conveyor-rig">
+                <!-- Moving Track -->
+                <div class="conveyor-track">
+                    <div class="conveyor-belt-stripes" id="conveyor-stripes"></div>
+                    <div class="conveyor-rollers">
+                        <span class="roller"></span>
+                        <span class="roller"></span>
+                        <span class="roller"></span>
+                        <span class="roller"></span>
+                        <span class="roller"></span>
+                        <span class="roller"></span>
+                        <span class="roller"></span>
+                        <span class="roller"></span>
+                    </div>
+                </div>
+
+                <!-- Optical Laser Scanner Tunnel -->
+                <div class="optical-tunnel" id="optical-tunnel">
+                    <div class="tunnel-roof">SCANNER TUNNEL</div>
+                    <div class="laser-scanner" id="laser-scanner"></div>
+                    <div class="sensor-indicator" id="sensor-indicator">IDLE</div>
+                </div>
+
+                <!-- Animated Envelope Particle -->
+                <div class="traveling-envelope" id="traveling-envelope" style="display: none;">
+                    <div class="envelope-stamp-mini">🏷️</div>
+                    <div class="envelope-pin-tag" id="travel-pin-tag">400001</div>
+                    <div class="envelope-lines-mini"></div>
+                </div>
+
+                <!-- 5 Destination Sorting Bins -->
+                <div class="sorting-bins-grid">
+                    <!-- Bin 1 -->
+                    <div class="sort-bin" id="bin-1" data-bin="BOM-GPO">
+                        <div class="bin-diverter" id="diverter-1"></div>
+                        <div class="bin-chute"></div>
+                        <div class="bin-basket">
+                            <div class="bin-hub-badge">BOM-GPO</div>
+                            <strong class="bin-name">Mumbai Hub (West)</strong>
+                            <span class="bin-count" id="bin-count-1">0</span>
+                            <small class="bin-sub">PIN 400xxx</small>
+                        </div>
+                    </div>
+                    <!-- Bin 2 -->
+                    <div class="sort-bin" id="bin-2" data-bin="DEL-NDHO">
+                        <div class="bin-diverter" id="diverter-2"></div>
+                        <div class="bin-chute"></div>
+                        <div class="bin-basket">
+                            <div class="bin-hub-badge">DEL-NDHO</div>
+                            <strong class="bin-name">Delhi Hub (North)</strong>
+                            <span class="bin-count" id="bin-count-2">0</span>
+                            <small class="bin-sub">PIN 110xxx</small>
+                        </div>
+                    </div>
+                    <!-- Bin 3 -->
+                    <div class="sort-bin" id="bin-3" data-bin="BLR-GPO">
+                        <div class="bin-diverter" id="diverter-3"></div>
+                        <div class="bin-chute"></div>
+                        <div class="bin-basket">
+                            <div class="bin-hub-badge">BLR-GPO</div>
+                            <strong class="bin-name">Bengaluru (South)</strong>
+                            <span class="bin-count" id="bin-count-3">0</span>
+                            <small class="bin-sub">PIN 560xxx</small>
+                        </div>
+                    </div>
+                    <!-- Bin 4 -->
+                    <div class="sort-bin" id="bin-4" data-bin="CCU-GPO">
+                        <div class="bin-diverter" id="diverter-4"></div>
+                        <div class="bin-chute"></div>
+                        <div class="bin-basket">
+                            <div class="bin-hub-badge">CCU-GPO</div>
+                            <strong class="bin-name">Kolkata Hub (East)</strong>
+                            <span class="bin-count" id="bin-count-4">0</span>
+                            <small class="bin-sub">PIN 700xxx</small>
+                        </div>
+                    </div>
+                    <!-- Bin 5: Manual Reject -->
+                    <div class="sort-bin bin-reject" id="bin-5" data-bin="REJECT">
+                        <div class="bin-diverter" id="diverter-5"></div>
+                        <div class="bin-chute"></div>
+                        <div class="bin-basket">
+                            <div class="bin-hub-badge badge-reject">REJECT</div>
+                            <strong class="bin-name">Manual Review</strong>
+                            <span class="bin-count" id="bin-count-5">0</span>
+                            <small class="bin-sub">Missing / Unclear</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conveyor Telemetry Bar -->
+            <div class="conveyor-telemetry-bar">
+                <div class="sim-stat">
+                    <span>Envelopes Sorted:</span>
+                    <strong id="sim-total-count">0</strong>
+                </div>
+                <div class="sim-stat">
+                    <span>Sorting Speed:</span>
+                    <strong id="sim-speed-val">1,200 pcs / hr</strong>
+                </div>
+                <div class="sim-stat">
+                    <span>Last Diverted Chute:</span>
+                    <strong class="highlight-mint" id="sim-last-chute">Standby</strong>
+                </div>
+                <div class="sim-stat">
+                    <span>Optical Read Reliability:</span>
+                    <strong class="highlight-rose" id="sim-accuracy">99.4%</strong>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Live Webcam & Virtual Scanner Modal Viewfinder -->
+    <div class="modal-backdrop" id="camera-modal" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="camera-modal-title">
+        <div class="camera-modal-card spotlight-card">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <span class="modal-icon">📷</span>
+                    <div>
+                        <h3 class="modal-title" id="camera-modal-title">Live Envelope Camera Scanner</h3>
+                        <p class="modal-sub">Scan physical mail directly or test with real-time simulated envelope optics</p>
+                    </div>
+                </div>
+                <div class="modal-header-actions">
+                    <div class="camera-source-tabs">
+                        <button type="button" class="source-tab active" id="tab-source-device" title="Use physical hardware webcam">
+                            <span>📹 Real Camera</span>
+                        </button>
+                        <button type="button" class="source-tab" id="tab-source-virtual" title="Simulate live envelope camera feed">
+                            <span>🎮 Virtual Feed</span>
+                        </button>
+                    </div>
+                    <button class="modal-close-btn" id="close-camera-btn" type="button" title="Close Camera">&times;</button>
+                </div>
+            </div>
+
+            <!-- Virtual Feed Sample Selector (active in Virtual mode) -->
+            <div class="virtual-preset-bar" id="virtual-preset-bar" style="display: none;">
+                <span class="virtual-preset-label">Test Envelope:</span>
+                <div class="virtual-preset-chips">
+                    <button type="button" class="btn-preset-chip active" data-sample="1">01 Mumbai</button>
+                    <button type="button" class="btn-preset-chip" data-sample="2">02 Bengaluru</button>
+                    <button type="button" class="btn-preset-chip" data-sample="3">03 Royal Palms</button>
+                    <button type="button" class="btn-preset-chip" data-sample="4">04 Orchid</button>
+                    <button type="button" class="btn-preset-chip" data-sample="5">05 Lucknow</button>
+                </div>
+            </div>
+
+            <div class="camera-viewfinder-box">
+                <!-- Physical Video Stream -->
+                <video id="camera-video" autoplay playsinline muted></video>
+
+                <!-- Virtual Canvas Feed -->
+                <canvas id="virtual-camera-canvas" style="display: none;"></canvas>
+
+                <!-- Hidden Canvas for capture snapshot extraction -->
+                <canvas id="camera-canvas" style="display: none;"></canvas>
+
+                <!-- Visual Camera Shutter Flash -->
+                <div class="camera-flash" id="camera-flash"></div>
+
+                <!-- Camera Status / Permission Overlay -->
+                <div class="camera-status-overlay" id="camera-status-overlay">
+                    <div class="camera-status-spinner" id="camera-status-spinner"></div>
+                    <div class="camera-status-icon" id="camera-status-icon" style="display: none;">📷</div>
+                    <p class="camera-status-title" id="camera-status-title">Connecting to Camera...</p>
+                    <p class="camera-status-sub" id="camera-status-sub">Please allow camera permissions in your browser</p>
+                    <div class="camera-status-actions" id="camera-status-actions" style="display: none;">
+                        <button class="btn-status-action btn-status-primary" id="btn-fallback-virtual" type="button">
+                            🎮 Switch to Virtual Simulator Feed
+                        </button>
+                        <button class="btn-status-action btn-status-secondary" id="btn-retry-camera" type="button">
+                            🔄 Retry Camera Access
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Reticle Target Overlay -->
+                <div class="camera-reticle" id="camera-reticle">
+                    <div class="reticle-corner reticle-tl"></div>
+                    <div class="reticle-corner reticle-tr"></div>
+                    <div class="reticle-corner reticle-br"></div>
+                    <div class="reticle-corner reticle-bl"></div>
+                    <div class="reticle-crosshair"></div>
+                    <div class="reticle-scanline"></div>
+                    <div class="reticle-guide-text">ALIGN ENVELOPE WITHIN TARGET FRAME</div>
+                </div>
+
+                <!-- Live Camera Telemetry Badges -->
+                <div class="camera-hud-badge" id="camera-hud-badge">
+                    <span class="badge-dot pulse-dot"></span>
+                    <span id="camera-hud-text">Live Camera Feed</span>
+                </div>
+
+                <div class="camera-hud-specs" id="camera-hud-specs">
+                    <span id="camera-fps-spec">30 FPS</span> · <span id="camera-res-spec">1280×720</span> · <span id="camera-iso-spec">ISO 100</span>
+                </div>
+            </div>
+
+            <div class="camera-controls-bar">
+                <button class="btn-camera-secondary" id="switch-camera-btn" type="button" title="Flip Camera Device or Preset">
+                    <span id="switch-camera-icon">🔄</span>
+                    <span id="switch-camera-label">Flip Camera</span>
+                </button>
+                <button class="btn-camera-primary" id="snap-btn" type="button">
+                    <div class="btn-camera-glow"></div>
+                    📸 Capture & Analyze Envelope
+                </button>
+                <input type="file" id="camera-upload-input" accept="image/png,image/jpeg,image/jpg,image/bmp,image/webp" hidden>
+                <button class="btn-camera-secondary" id="camera-upload-btn" type="button" title="Upload Photo Directly">
+                    📁 Load Photo
+                </button>
+                <button class="btn-camera-secondary" id="cancel-camera-btn" type="button">
+                    Close
+                </button>
             </div>
         </div>
-    </section>
-    <section class="section section-dark" id="architecture">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-badge">Neural Architecture</span>
-                <h2 class="section-title">ScratchPostalCRNN</h2>
-                <p class="section-desc">Every layer designed from first principles. Zero pretrained dependencies.</p>
-            </div>
-            <div class="arch-image-container"><img src="assets/architecture_hero.jpg" alt="PostalVision Architecture" class="arch-image" loading="lazy"></div>
-            <div class="arch-stages">
-                <div class="stage-card"><div class="stage-num">1</div><h4>Stem Conv</h4><p>5x5, 32ch + BN + LeakyReLU + MaxPool(2x2)</p></div>
-                <div class="stage-card"><div class="stage-num">2</div><h4>Detail Block</h4><p>3x3, 64ch + BN + LeakyReLU + MaxPool(2x2)</p></div>
-                <div class="stage-card"><div class="stage-num">3</div><h4>Glyph Block</h4><p>2x 3x3, 128ch + Asymmetric MaxPool(2x1)</p></div>
-                <div class="stage-card"><div class="stage-num">4</div><h4>Morphology</h4><p>2x 3x3, 256ch + Asymmetric MaxPool(2x1)</p></div>
-                <div class="stage-card"><div class="stage-num">5</div><h4>Collapse</h4><p>2x1 Conv, 256ch. H=1</p></div>
-                <div class="stage-card"><div class="stage-num">6</div><h4>Map-to-Seq</h4><p>Linear 256->192 + LayerNorm</p></div>
-                <div class="stage-card"><div class="stage-num">7</div><h4>BiGRU</h4><p>2-Layer Bidirectional GRU, h=128</p></div>
-                <div class="stage-card"><div class="stage-num">8</div><h4>CTC Head</h4><p>Linear -> 76 classes + CTC decoding</p></div>
-            </div>
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div class="toast" id="toast" style="display: none;">
+        <div class="toast-content">
+            <span class="toast-icon" id="toast-icon">✓</span>
+            <span id="toast-msg">Action performed successfully</span>
         </div>
-    </section>
-    <section class="section" id="demo">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-badge">Static Sample</span>
-                <h2 class="section-title">Envelope Processing Demo</h2>
-                <p class="section-desc">Browse pre-generated synthetic envelope examples. Live OCR requires the Flask app running locally.</p>
-            </div>
-            <div class="demo-grid">
-                <div class="demo-card"><img src="assets/sample_envelope_1.png" alt="Sample Envelope 1" class="demo-img" loading="lazy"><div class="demo-overlay"><span class="demo-badge">Sample #1</span></div></div>
-                <div class="demo-card"><img src="assets/sample_envelope_2.png" alt="Sample Envelope 2" class="demo-img" loading="lazy"><div class="demo-overlay"><span class="demo-badge">Sample #2</span></div></div>
-            </div>
-            <div class="demo-cta">
-                <p>To run live OCR, clone the repo and start the Flask webapp:</p>
-                <div class="code-block"><code>git clone https://github.com/azij2023/PostVision.git
-cd PostVision && pip install -r requirements.txt
-python webapp/app.py</code></div>
-                <p class="code-hint">Then open <strong>http://127.0.0.1:5000</strong> in your browser.</p>
-            </div>
-        </div>
-    </section>
-    <section class="section section-dark" id="metrics">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-badge">Evaluation</span>
-                <h2 class="section-title">Performance Metrics</h2>
-            </div>
-            <div class="metrics-grid">
-                <div class="metric-card"><div class="metric-label">CER</div><div class="metric-name">Character Error Rate</div><div class="metric-desc">Raw character-level transcription fidelity</div></div>
-                <div class="metric-card"><div class="metric-label">WER</div><div class="metric-name">Word Error Rate</div><div class="metric-desc">Word tokenization and spelling accuracy</div></div>
-                <div class="metric-card"><div class="metric-label">SEQ</div><div class="metric-name">Sequence Accuracy</div><div class="metric-desc">Exact string match for mail sorting</div></div>
-                <div class="metric-card"><div class="metric-label">PIN</div><div class="metric-name">PIN Extraction</div><div class="metric-desc">6-digit postal code accuracy</div></div>
-            </div>
-        </div>
-    </section>
-    <section class="section" id="dataset">
-        <div class="section-inner">
-            <div class="section-header">
-                <span class="section-badge">Training Data</span>
-                <h2 class="section-title">Full EMNIST Dataset</h2>
-                <p class="section-desc">All 6 splits auto-extracted from archive.zip for maximum diversity.</p>
-            </div>
-            <div class="dataset-table-wrap">
-                <table class="dataset-table">
-                    <thead><tr><th>Split</th><th>Train</th><th>Test</th><th>Characters</th><th>Use Case</th></tr></thead>
-                    <tbody>
-                        <tr><td>Letters</td><td>88,800</td><td>14,800</td><td>A-Z (26)</td><td>Address text</td></tr>
-                        <tr><td>Digits</td><td>240,000</td><td>40,000</td><td>0-9 (10)</td><td>PIN codes</td></tr>
-                        <tr><td>Balanced</td><td>112,800</td><td>18,800</td><td>47 classes</td><td>Balanced training</td></tr>
-                        <tr><td>ByClass</td><td>697,932</td><td>116,323</td><td>62 classes</td><td>Full coverage</td></tr>
-                        <tr><td>ByMerge</td><td>697,932</td><td>116,323</td><td>47 classes</td><td>Merged chars</td></tr>
-                        <tr><td>MNIST</td><td>60,000</td><td>10,000</td><td>0-9 (10)</td><td>Digit boost</td></tr>
-                    </tbody>
-                    <tfoot><tr><td><strong>Total</strong></td><td><strong>1,897,464</strong></td><td><strong>316,246</strong></td><td colspan="2"><strong>2.2M+ real handwritten samples</strong></td></tr></tfoot>
-                </table>
-            </div>
-        </div>
-    </section>
-    <section class="section section-dark" id="quickstart">
-        <div class="section-inner">
-            <div class="section-header"><span class="section-badge">Getting Started</span><h2 class="section-title">Quick Start</h2></div>
-            <div class="quickstart-grid">
-                <div class="qs-card"><div class="qs-step">1</div><h4>Clone & Install</h4><div class="code-block code-sm"><code>git clone https://github.com/azij2023/PostVision.git
-cd PostVision && pip install -r requirements.txt</code></div></div>
-                <div class="qs-card"><div class="qs-step">2</div><h4>Generate Samples</h4><div class="code-block code-sm"><code>python main.py generate --num 5</code></div></div>
-                <div class="qs-card"><div class="qs-step">3</div><h4>Train Model</h4><div class="code-block code-sm"><code>python main.py train --dataset emnist --epochs 10</code></div></div>
-                <div class="qs-card"><div class="qs-step">4</div><h4>Launch Web UI</h4><div class="code-block code-sm"><code>python webapp/app.py</code></div></div>
-            </div>
-        </div>
-    </section>
-    <footer class="footer">
-        <div class="footer-inner">
-            <div class="footer-brand"><span class="footer-logo">PostalVision</span><p>Deep Neural Network OCR & Address Intelligence</p><p class="footer-course">MSDSM Sem 3 - AI & Machine Learning</p></div>
-            <div class="footer-links"><a href="https://github.com/azij2023/PostVision" target="_blank">GitHub</a><a href="#architecture">Architecture</a><a href="#features">Features</a></div>
-        </div>
-        <div class="footer-bottom"><p>Built 100% from scratch. No ResNet, No DenseNet, No pretrained models.</p></div>
-    </footer>
-    <script>
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
-    const navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>50)});
-    const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
-    document.querySelectorAll('.feature-card,.stage-card,.metric-card,.qs-card,.demo-card').forEach(el=>{el.classList.add('fade-in');observer.observe(el)});
-    function animateCounter(el,target,dur=1500){if(target===0){el.textContent='0';return}let s=0;const step=target/(dur/16);const iv=setInterval(()=>{s+=step;if(s>=target){el.textContent=target.toLocaleString()+(el.dataset.suffix||'');clearInterval(iv)}else{el.textContent=Math.floor(s).toLocaleString()+(el.dataset.suffix||'')}},16)}
-    const ho=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('.stat-value').forEach(s=>{animateCounter(s,parseInt(s.dataset.target),s.dataset.target>1000?2000:1000)});ho.unobserve(e.target)}})},{threshold:0.3});
-    ho.observe(document.querySelector('.hero-stats'));
-    </script>
+    </div>
+
+    <script src="sample-data.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

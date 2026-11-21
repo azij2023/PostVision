@@ -1,11 +1,11 @@
 # PostalVision: Postal Address Image / OCR to Structured Text Data
 
-[![Live Showcase](https://img.shields.io/badge/Live%20Showcase-GitHub%20Pages-e11d48?style=for-the-badge&logo=github)](https://azij2023.github.io/PostVision/)
+[![Original App Sample](https://img.shields.io/badge/Original%20App%20Sample-GitHub%20Pages-e11d48?style=for-the-badge&logo=github)](https://azij2023.github.io/PostVision/)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776ab?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-ee4c2c?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org)
 [![EMNIST](https://img.shields.io/badge/Dataset-EMNIST%20(2.2M%20samples)-7c3aed?style=for-the-badge)](https://www.nist.gov/itl/products-and-services/emnist-dataset)
 
-> **Live Interactive Showcase**: [https://azij2023.github.io/PostVision/](https://azij2023.github.io/PostVision/)  
+> **Original App Sample**: [https://azij2023.github.io/PostVision/](https://azij2023.github.io/PostVision/) — explore five synthetic envelopes and their example address records in the original interface. GitHub Pages does not run live OCR; use the Flask app below to process your own images.
 > **Course / Project**: MSDSM Sem 3 - AI & Machine Learning  
 > **Key Constraint Satisfied**: **100% Custom Deep Neural Networks** designed from first principles with zero standard model dependencies (**No ResNet, No DenseNet, No MobileNet, No VGG, No EfficientNet**).
 
