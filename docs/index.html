@@ -63,7 +63,7 @@
     <!-- Main Content Container -->
     <main class="main-content">
         <div class="sample-notice" role="status">
-            This is the original PostalVision interface with five static sample records. Select a preset to explore the address fields and exports. Live OCR for uploaded images requires the Flask app.
+            This is the original PostalVision interface with five static sample records. Choose an envelope image to explore its address fields and exports. Live OCR for uploaded images requires the Flask app.
             <a href="https://github.com/azij2023/PostVision#8-launch-the-interactive-web-dashboard" target="_blank" rel="noopener">Run the full app</a>
         </div>
 
@@ -72,7 +72,7 @@
             <div class="section-header">
                 <div class="hero-badge">Original App Sample</div>
                 <h2 class="section-title">Explore a Sample Envelope</h2>
-                <p class="section-desc">Choose one of the five envelopes below to inspect its example address record.</p>
+                <p class="section-desc">Choose an envelope image to inspect its example address record.</p>
             </div>
 
             <!-- Drag & Drop Zone -->
@@ -126,43 +126,48 @@
             <!-- Quick Benchmark Samples Bar -->
             <div class="sample-section">
                 <div class="sample-header">
-                    <span class="sample-label">⚡ Quick Presets:</span>
-                    <span class="sample-subtext">Click to load a synthetic envelope example</span>
+                    <span class="sample-label">Sample envelopes</span>
+                    <span class="sample-subtext">Select an image, then view its address data</span>
                 </div>
                 <div class="sample-cards" id="sample-cards">
                     <button class="sample-card" data-sample="1" id="sample-btn-1">
+                        <img class="sample-thumbnail" src="assets/sample_envelope_1.png" alt="Envelope addressed to Priya Smith in Pune">
                         <span class="sample-badge">01</span>
                         <div class="sample-meta">
-                            <strong>Mumbai Log.</strong>
-                            <small>Commercial Mail</small>
+                            <strong>Priya Smith</strong>
+                            <small>Pune, Maharashtra</small>
                         </div>
                     </button>
                     <button class="sample-card" data-sample="2" id="sample-btn-2">
+                        <img class="sample-thumbnail" src="assets/sample_envelope_2.png" alt="Envelope addressed to Neha Williams in Bengaluru">
                         <span class="sample-badge">02</span>
                         <div class="sample-meta">
-                            <strong>Bengaluru Tech</strong>
-                            <small>Karnataka Terminal</small>
+                            <strong>Neha Williams</strong>
+                            <small>Bengaluru, Karnataka</small>
                         </div>
                     </button>
                     <button class="sample-card" data-sample="3" id="sample-btn-3">
+                        <img class="sample-thumbnail" src="assets/sample_envelope_3.png" alt="Envelope addressed to John Miller in Mumbai">
                         <span class="sample-badge">03</span>
                         <div class="sample-meta">
-                            <strong>Royal Palms</strong>
-                            <small>Standard Envelope</small>
+                            <strong>John Miller</strong>
+                            <small>Mumbai, Maharashtra</small>
                         </div>
                     </button>
                     <button class="sample-card" data-sample="4" id="sample-btn-4">
+                        <img class="sample-thumbnail" src="assets/sample_envelope_4.png" alt="Envelope addressed to Arjun Nair in Mumbai">
                         <span class="sample-badge">04</span>
                         <div class="sample-meta">
-                            <strong>Orchid Res.</strong>
-                            <small>Doctor Addressee</small>
+                            <strong>Arjun Nair</strong>
+                            <small>Mumbai, Maharashtra</small>
                         </div>
                     </button>
                     <button class="sample-card" data-sample="5" id="sample-btn-5">
+                        <img class="sample-thumbnail" src="assets/sample_envelope_5.png" alt="Envelope addressed to Olivia Jones in Lucknow">
                         <span class="sample-badge">05</span>
                         <div class="sample-meta">
-                            <strong>Lucknow Dist.</strong>
-                            <small>UP Postal Record</small>
+                            <strong>Olivia Jones</strong>
+                            <small>Lucknow, Uttar Pradesh</small>
                         </div>
                     </button>
                 </div>
